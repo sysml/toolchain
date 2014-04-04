@@ -111,7 +111,7 @@ GCC_URL=http://ftp.sunet.se/pub/gnu/gcc/releases/gcc-$(GCC_VERSION)
 ## ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/
 PCRE=pcre
 PCRE_VERSION=8.32
-PCRE_URL=http://switch.dl.sourceforge.net/project/pcre/pcre/8.32/
+PCRE_URL=http://switch.dl.sourceforge.net/project/pcre/pcre/8.32
 #ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/
 #pcre-8.32.tar.gz
 
