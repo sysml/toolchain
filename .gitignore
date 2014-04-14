@@ -1,0 +1,14 @@
+# Prefix
+x86_64-root
+x86_32-root
+
+# Build
+newlib-*
+_newlib*
+lwip-*
+_lwip*
+
+# tmp
+*~
+*.swp
+*.swo

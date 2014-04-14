@@ -1,21 +1,15 @@
-C++ Toolchain
-=============
+ClickOS toolchain
+=================
 
-Main toolchain ClickOS toolchain. This build the cpp cross compiler and the xen
-libs required to build ClickOS.
+There used to be a toolchain here. Currently this Makefile downloads and builds
+the necessary libraries for building ClickOS, namely Newlib and Lwip.
 
-Required packages on debian: 
+Required packages for building on debian are:
 
  - build-essential  (automake and etc)
- - libelf-dev  (xen)
- - libppl-pwl-dev  (gcc)
- - libppl-pwl (gcc)
- - libppl-dev (gcc)
- - libppl-c-dev  (gcc)
- - libcloog-ppl0  (gcc)
- - libcloog-ppl-dev  (gcc)
  - texinfo  (newlibc)
- - tree  (clickos)
+
+You also need MiniOS sources. You can get them from https://github.com/cnplab/clickos.
 
 The patches included in this repository are redistributed unmodified from the Xen 
 sources under ```tools/stubdom```.
@@ -23,29 +17,23 @@ sources under ```tools/stubdom```.
 To build: 
 
 ```
+$ EXPORT MINIOS_ROOT=<path_to_minios>
 $ make all
 ```
 
-This will install the toolchain in
-```./crossroot-$(XEN_TARGET_ARCH)/$(XEN_TARGET_ARCH)-xen-elf```. Below is what you
+This will install the libraries in
+```./$(XEN_TARGET_ARCH)-root/$(XEN_TARGET_ARCH)-xen-elf```. Below is what you
 should expect to see when the build completes
 
 ```
-./crossroot-$(GNU_ARCH)/$(GNU_ARCH)-xen-elf
-        |-- [1009            4096]  info
-        `-- [1009            4096]  x86_64-xen-elf
-            |-- [1009            4096]  bin
-            |-- [1009            4096]  include
-            |-- [1009            4096]  info
-            |-- [1009            4096]  lib
-            |-- [1009            4096]  libexec
-            |-- [1009            4096]  share
-            `-- [1009            4096]  x86_64-xen-elf
+./$(XEN_TARGET_ARCH)-root
+    |-- info
+    `-- $(XEN_TARGET_ARCH)-xen-elf
+        |-- include
+        |-- lib
+        `-- src
 ```
 
-To use the toolchain, you must set the $(TOOLCHAIN_ROOT) in your environment pointing 
-to the root toolchain directory.
+To use this libraries use the --with-newlib and --with-lwip options of configure
+pointing to $(XEN_TARGET_ARCH)-xen-elf directory.
 
-```
-export TOOLCHAIN_ROOT ?= $(realpath ../../toolchain/)
-```
