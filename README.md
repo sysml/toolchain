@@ -7,6 +7,7 @@ the necessary libraries for building ClickOS, namely Newlib and Lwip.
 Required packages for building on debian are:
 
  - build-essential  (automake and etc)
+ - gcc	(up to 4.7)
  - texinfo  (newlibc)
 
 You also need MiniOS sources. You can get them from https://github.com/cnplab/clickos.

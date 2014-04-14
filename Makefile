@@ -60,15 +60,15 @@ TARGET	 = $(XEN_TARGET_ARCH)-xen-elf
 ################################################################################
 # Commands and functions
 ################################################################################
-CC			:= gcc
-CXX			:= g++
-AR			:= ar
-LD			:= ld
-RANLIB		:= ranlib
-READELF		:= readelf
-STRIP		:= strip
+CC			?= gcc
+CXX			?= g++
+AR			?= ar
+LD			?= ld
+RANLIB		?= ranlib
+READELF		?= readelf
+STRIP		?= strip
 
-FETCHER		:= wget -c -O
+FETCHER		?= wget -c -O
 
 
 ################################################################################
