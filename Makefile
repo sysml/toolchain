@@ -10,7 +10,7 @@ endif
 include config.mk
 
 .PHONY: all
-all: cross-newlib cross-lwip
+all: cross-newlib cross-lwip cross-pcre
 
 
 ################################################################################
@@ -191,6 +191,62 @@ distclean-lwip: clean-lwip
 	rm -rf $(LWIP_ARCHIVE)
 	rm -f  _lwip-install
 
+################################################################################
+# pcre
+################################################################################
+PCRE_SRC	= pcre-$(PCRE_VERSION)
+PCRE_BUILD	= pcre-$(XEN_TARGET_ARCH)
+
+
+download: $(PCRE_ARCHIVE)
+$(PCRE_ARCHIVE):
+		$(FETCHER) $@ $(PCRE_URL)
+
+_pcre-src: $(PCRE_ARCHIVE)
+		rm -rf $(PCRE_DIR) $(PCRE_SRC)
+		tar xzf $<
+		[ "$(PCRE_DIR)" != "$(PCRE_SRC)" ] && mv $(PCRE_DIR) $(PCRE_SRC) || true
+		touch $@
+
+
+_pcre-install: _pcre-build
+		$(MAKE) DESTDIR= -C $(PCRE_BUILD) install
+		touch $@
+
+
+_pcre-build: _pcre-src
+		rm -rf $(PCRE_BUILD)
+		mkdir -p $(PCRE_BUILD)
+		@(      cd $(PCRE_BUILD) && 					\
+				CC_FOR_TARGET="$(CC) $(NEWLIB_CFLAGS)"		\
+				CXX_FOR_TARGET=$(CXX)				\
+				AR_FOR_TARGET=$(AR)				\
+				LD_FOR_TARGET=$(LD)				\
+				RANLIB_FOR_TARGET=$(RANLIB)			\
+				READELF_FOR_TARGET=$(READELF)			\
+				STRIP_FOR_TARGET=$(STRIP)			\
+				../$(PCRE_SRC)/configure			\
+						--prefix=$(PREFIX)/$(TARGET)	\
+						--target=$(TARGET)		\
+						--verbose			\
+						--disable-shared		\
+						--enable-utf8			\
+						--enable-unicode-properties	\
+		)
+		$(MAKE) DESTDIR= -C $(PCRE_BUILD)
+		touch $@
+
+.PHONY: cross-pcre clean-pcre distclean-pcre
+cross-pcre: _pcre-install
+
+clean-pcre:
+		rm -rf $(PCRE_SRC)
+		rm -f  _pcre-src
+
+distclean: distclean-pcre
+distclean-pcre: clean-pcre
+		rm -rf $(PCRE_ARCHIVE)
+		rm -f  _pcre-install
 
 ################################################################################
 # clean
