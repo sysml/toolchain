@@ -3,7 +3,8 @@ NEWLIB_URL          := ftp://sourceware.org/pub/newlib/newlib-$(NEWLIB_VERSION).
 NEWLIB_ARCHIVE		:= newlib-$(NEWLIB_VERSION).tar.gz
 NEWLIB_DIR			:= newlib-$(NEWLIB_VERSION)
 
-LWIP_VERSION        := 1.3.0
-LWIP_URL			:= http://download.savannah.gnu.org/releases/lwip/older_versions/lwip-$(LWIP_VERSION).tar.gz
-LWIP_ARCHIVE		:= lwip-$(LWIP_VERSION).tar.gz
-LWIP_DIR			:= lwip
+# lwip: master branch at 27 Feb 2015
+LWIP_COMMIT         := a310bc1
+LWIP_URL			:= http://git.savannah.gnu.org/gitweb/\?p\=lwip.git\;a\=snapshot\;h\=$(LWIP_COMMIT)\;sf\=tgz
+LWIP_ARCHIVE		:= lwip-$(LWIP_COMMIT).tar.gz
+LWIP_DIR			:= lwip-$(LWIP_COMMIT)
