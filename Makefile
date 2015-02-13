@@ -96,7 +96,7 @@ NEWLIB_CFLAGS	+= -isystem $(MINIOS_ROOT)/include
 NEWLIB_CFLAGS	+= -isystem $(MINIOS_ROOT)/include/arch
 NEWLIB_CFLAGS	+= -isystem $(MINIOS_ROOT)/include/$(TARGET_ARCH_FAM)
 NEWLIB_CFLAGS	+= -isystem $(MINIOS_ROOT)/include/$(TARGET_ARCH_FAM)/$(XEN_TARGET_ARCH)
-NEWLIB_CFLAGS	+= -fno-stack-protector
+NEWLIB_CFLAGS	+= -fno-stack-protector -fno-omit-frame-pointer
 
 download: $(NEWLIB_ARCHIVE)
 $(NEWLIB_ARCHIVE):
