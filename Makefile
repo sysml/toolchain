@@ -157,7 +157,7 @@ distclean-newlib: clean-newlib
 ################################################################################
 # lwip
 ################################################################################
-LWIP_SRC	 = lwip-$(LWIP_VERSION)
+LWIP_SRC	 = lwip-$(LWIP_COMMIT)
 
 download: $(LWIP_ARCHIVE)
 $(LWIP_ARCHIVE):
@@ -167,7 +167,6 @@ _lwip-src: $(LWIP_ARCHIVE)
 	rm -rf $(LWIP_DIR) $(LWIP_SRC)
 	tar xzf $<
 	[ "$(LWIP_DIR)" != "$(LWIP_SRC)" ] && mv $(LWIP_DIR) $(LWIP_SRC) || true
-	patch -d $(LWIP_SRC) -p0 < patches/lwip.patch-cvs
 	touch $@
 
 _lwip-install: _lwip-src
