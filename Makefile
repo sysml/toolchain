@@ -157,7 +157,7 @@ distclean-newlib: clean-newlib
 ################################################################################
 # lwip
 ################################################################################
-LWIP_SRC	 = lwip-$(LWIP_COMMIT)
+LWIP_SRC	 = lwip
 
 download: $(LWIP_ARCHIVE)
 $(LWIP_ARCHIVE):
