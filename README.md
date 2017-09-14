@@ -10,7 +10,7 @@ Required packages for building on debian are:
  - gcc	(up to 4.7)
  - texinfo  (newlibc)
 
-You also need MiniOS sources. You can get them from https://github.com/cnplab/clickos.
+You also need MiniOS sources. You can get them from https://github.com/sysml/mini-os.
 
 The patches included in this repository are redistributed unmodified from the Xen 
 sources under ```tools/stubdom```.
